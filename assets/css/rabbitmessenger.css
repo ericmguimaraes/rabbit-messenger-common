@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+}
+
+.background {
+  background-color: #cecece;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container > .login-panel {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 20%;
+}
+
+.login-panel .img-responsive {
+  margin-bottom: 10%;
+}
+
+.login-panel > div {
+  background-color: #F5F0EA;
+  padding: 50px;
+  border-radius: 8px;
+}
+
+.login-panel h1 {
+  padding-bottom: 20px;
+}
