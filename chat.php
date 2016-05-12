@@ -17,7 +17,7 @@
     <script src="assets/js/rabbitmessenger.js"></script>
     <script id="user-template" type="text/x-custom-template">
       <div class="user">
-        <span class="glyphicon glyphicon-user"></span> {{name}}
+        <span class="glyphicon glyphicon-user"> {{name}}</span>
       </div>
     </script>
   </body>
