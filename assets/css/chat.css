@@ -1,0 +1,36 @@
+.container-fluid {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.container-fluid > div {
+  height: 100%;
+}
+
+.container-fluid > div:first-child {
+  border-right: 3px solid #9e9e9e
+}
+
+.container-fluid > div:last-child {
+  background-color: #cecece;
+}
+
+#queues {
+  padding: 0;
+}
+
+#queues .user {
+  padding-left: 10px;
+  width: 100%;
+  height: 5rem;
+  line-height: 5rem;
+  border-bottom: 1px solid #cecece;
+  transition: all .1s linear;
+}
+
+#queues .user:hover {
+  cursor: pointer;
+  background-color: #ddeedd;
+}
