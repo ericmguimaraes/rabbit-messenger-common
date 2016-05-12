@@ -2,8 +2,21 @@ var RabbitMessenger = (function() {
   var messages = {};
   var activeTimeout = null;
 
-  function openConversation(queueName) {
-    createNewTimeout(queueName);
+  function ajax(apiFunction, callback, method) {
+    if (method == null) {
+      method = 'GET';
+    }
+    $.ajax({
+      url: 'localhost:15672/api/' + apiFunction,
+      method: method,
+      dataType: 'json',
+      username: 'web',
+      password: 'web'
+    }).done(function(queues, rt, response) {
+      if (response.status == 200 && callback != null) {
+        callback(queues);
+      }
+    });
   }
 
   function renderQueues(rmq_queues) {
@@ -15,10 +28,15 @@ var RabbitMessenger = (function() {
   }
 
   function load() {
+    ajax("queues", renderQueues)
   }
 
 
-  return { render: renderQueues };
+  return {
+    ajax: ajax
+  , renderQueues: renderQueues
+  , load: load
+  };
 })();
 
 
