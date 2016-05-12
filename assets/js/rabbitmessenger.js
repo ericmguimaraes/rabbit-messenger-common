@@ -7,7 +7,7 @@ var RabbitMessenger = (function() {
       method = 'GET';
     }
     $.ajax({
-      url: 'http://localhost:15672/api/' + apiFunction,
+      url: 'http://uakk7f3c570e.ajalvesneto.koding.io:15672/api/' + apiFunction,
       method: method,
       dataType: 'json',
       username: 'web',
