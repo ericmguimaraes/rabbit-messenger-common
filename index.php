@@ -15,21 +15,48 @@
         <div class="col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-2">
           <div class="account-wall text-center">
             <img class="img-responsive" src="assets/img/logo_login.jpg" alt="">
-            <form class="form-horizontal" action="" method="POST">
+            <div class="form-horizontal">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email" required autofocus>
+                <input id="user" name="user" type="email" class="form-control" placeholder="Email" required autofocus>
               </div>
               <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                <button id="login" class="btn btn-lg btn-primary btn-block" type="button">
                   Entrar
                 </button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="alert-danger hidden">Usuário inexistente.</div>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    <script>
+      var login = function() {
+        var userField = $("#user");
+        var user = userField.val();
+        var users = [
+          "railan@rabbitmessenger.com.br"
+        , "eric@rabbitmessenger.com.br"
+        , "tarcisio@rabbitmessenger.com.br"
+        , "saulo@rabbitmessenger.com.br"
+        , "tonny@rabbitmessenger.com.br"
+        ];
+        if (users.indexOf(user) >= 0) {
+          localStorage.currentUser = user;
+          window.location = "chat.php";
+        } else {
+          userField.closest(".form-group").addClass("has-error");
+          $(".alert-danger").removeClass("hidden");
+        }
+      };
+      $("#login").click(login);
+      $(document).keypress(function(e) {
+        if (e.which == 13) {
+          login();
+        }
+      });
+    </script>
   </body>
 </html>
 

@@ -1,6 +1,6 @@
 var RabbitMessenger = (function() {
   var messageList = {};
-  var currentUser = "saulo@rabbitmessenger.com.br";
+  var currentUser = localStorage.currentUser;
   var currentConversation = null;
   var users = [
     "railan@rabbitmessenger.com.br"
@@ -9,6 +9,12 @@ var RabbitMessenger = (function() {
   , "saulo@rabbitmessenger.com.br"
   , "tonny@rabbitmessenger.com.br"
   ];
+
+  function logout() {
+    currentUser = null;
+    delete localStorage.currentUser;
+    window.location = "index.php";
+  }
 
   function dumpMessages() {
     localStorage.messageList = JSON.stringify(messageList);
@@ -30,10 +36,14 @@ var RabbitMessenger = (function() {
     } else {
       queue = message.sender;
     }
-    if (messageList[queue] == null) {
-      messageList[queue] = [];
+    if (messageList[currentUser] == null) {
+      messageList[currentUser] = {};
     }
-    messageList[queue].push(message);
+
+    if (messageList[currentUser][queue] == null) {
+      messageList[currentUser][queue] = [];
+    }
+    messageList[currentUser][queue].push(message);
     if (queue == currentConversation) {
       appendMessage(message);
     }
@@ -145,7 +155,7 @@ var RabbitMessenger = (function() {
 
   function renderMessages() {
     $("#messages").html("");
-    renderTemplate("message-template", messageList[currentConversation], $("#messages"))
+    renderTemplate("message-template", messageList[currentUser][currentConversation], $("#messages"))
   }
 
   function load() {
@@ -170,6 +180,7 @@ var RabbitMessenger = (function() {
   , unselect: function() {
       changeCurrentConversation(null);
     }
+  , logout: logout
   };
 })();
 
