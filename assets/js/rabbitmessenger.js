@@ -28,6 +28,14 @@ var RabbitMessenger = (function() {
     }
   }
 
+  function showEnvelope(user, text) {
+    $(".user[data-user='" + user + "']").addClass("new-message");
+  }
+
+  function hideEnvelope(user) {
+    $(".user[data-user='" + user + "']").removeClass("new-message");
+  }
+
   function receiveMessage(message) {
     var message = classifyMessage(message);
     var queue;
@@ -46,6 +54,8 @@ var RabbitMessenger = (function() {
     messageList[currentUser][queue].push(message);
     if (queue == currentConversation) {
       appendMessage(message);
+    } else if (message.class == "theirs") {
+      showEnvelope(queue);
     }
   }
 
@@ -76,6 +86,7 @@ var RabbitMessenger = (function() {
       var element = template;
       for (key in d) {
         element = element.replace(new RegExp("{{" + key + "}}", "g"), d[key]);
+        console.log(key, d[key]);
       }
       if ($appendTo != null) {
         $appendTo.append(element);
@@ -84,16 +95,14 @@ var RabbitMessenger = (function() {
   }
 
   function renderQueues() {
-    var userTemplate = $("#user-template").html();
     var queues = $("#queues");
     queues.on("click", ".user", function(event){
       changeCurrentConversation(event.currentTarget.children[0].innerHTML);
     });
-    users
-      //.filter(function(user){ return user != currentUser; })
-      .map(function(user) {
-      queues.append(userTemplate.replace("{{name}}", user));
+    var qs = users .map(function(user) {
+      return {name: user};
     });
+    renderTemplate("user-template", qs, queues)
   }
 
   function changeCurrentConversation(user) {
@@ -103,6 +112,7 @@ var RabbitMessenger = (function() {
     if (user != null) {
       renderMessages();
       messages.addClass("talking");
+      hideEnvelope(user);
     } else {
       messages.removeClass("talking");
     }
@@ -172,6 +182,7 @@ var RabbitMessenger = (function() {
         sendMessage();
       }
     });
+    $(".bg-primary span:last-of-type").html(currentUser.replace(/@.*/, ''));
     $("#send").on("click", sendMessage);
     window.setInterval(fetchMessages, 5000);
   }

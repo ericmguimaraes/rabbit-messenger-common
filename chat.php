@@ -12,7 +12,8 @@
     <div class="container-fluid">
       <div id="queues" class="col-xs-3 col-lg-4">
         <div class="bg-primary">
-          <span class="glyphicon glyphicon-user"></span> Contatos
+          <span class="glyphicon glyphicon-user"></span>
+          <span></span>
         </div>
       </div>
       <div id="message-area" class="col-xs-9 col-lg-8">
@@ -26,8 +27,8 @@
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     <script src="assets/js/rabbitmessenger.js"></script>
     <script id="user-template" type="text/x-custom-template">
-      <div class="user">
-        <span>{{name}}</span>
+      <div class="user" data-user="{{name}}">
+        <span>{{name}}</span><span class="glyphicon glyphicon-envelope"></span>
       </div>
     </script>
     <script id="message-template" type="text/x-custom-template">
