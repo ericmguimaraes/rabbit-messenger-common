@@ -114,7 +114,11 @@ var RabbitMessenger = (function() {
 
   function sendMessage() {
     var messageText = $("#message-text");
-    var text = messageText.val();
+    var text = messageText.val().trim();
+    if (text == "") {
+      messageText.val("");
+      return;
+    }
     var message = {
       "content": text
     , "date": getCurrentDate()
