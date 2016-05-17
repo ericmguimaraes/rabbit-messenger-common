@@ -7,18 +7,25 @@
 
 .container-fluid > div {
   height: 100%;
+  padding: 0;
 }
 
 .container-fluid > div:first-child {
   border-right: 3px solid #9e9e9e
 }
 
-.container-fluid > div:last-child {
+#message-area {
   background-color: #cecece;
 }
 
-#queues {
-  padding: 0;
+#queues > div:first-child {
+  padding: 10px;
+  font-size: 22px;
+  text-align: center;
+  border-bottom: 1px solid #bbbbbb;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
 }
 
 #queues .user {
@@ -32,5 +39,57 @@
 
 #queues .user:hover {
   cursor: pointer;
+  padding-left: 20px;
+  font-weight: bold;
   background-color: #ddeedd;
+}
+
+#messages {
+  height: 90%;
+}
+
+#message-input-area {
+  height: 10%;
+  padding: 5px;
+}
+
+#message-input-area > textarea {
+  height: 100%;
+  width: calc(100% - 70px);
+  resize: none;
+}
+
+#message-input-area > button {
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  padding-right: 4px;
+  margin-left: 5px;
+  border-radius: 30px;
+  font-size: 20px;
+}
+
+#messages .row {
+  margin: 0;
+}
+
+.message {
+  display: inline-block;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.message > div:last-child {
+  padding-top: 5px;
+  font-size: 10px;
+}
+
+.message.theirs {
+  background-color: #eeeeee;
+}
+
+.message.ours {
+  background-color: #dff0d8;
+  float: right;
 }

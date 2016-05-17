@@ -10,14 +10,34 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div id="queues" class="col-xs-3 col-lg-2"></div>
-      <div id="messages" class="col-xs-9 col-lg-10"></div>
+      <div id="queues" class="col-xs-3 col-lg-4">
+        <div class="bg-primary">
+          <span class="glyphicon glyphicon-user"></span> Contatos
+        </div>
+      </div>
+      <div id="message-area" class="col-xs-9 col-lg-8">
+        <div id="messages"></div>
+        <div id="message-input-area" class="form-inline">
+          <textarea id="message-text" class="form-control"></textarea>
+          <button id="send" class="btn btn-primary form-control"><span class="glyphicon glyphicon-send"></span></button>
+        </div>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     <script src="assets/js/rabbitmessenger.js"></script>
     <script id="user-template" type="text/x-custom-template">
       <div class="user">
-        <span class="glyphicon glyphicon-user"> {{name}}</span>
+        <span>{{name}}</span>
+      </div>
+    </script>
+    <script id="message-template" type="text/x-custom-template">
+      <div class="message-box row">
+        <div class="message {{class}}">
+          <div class="row">{{content}}</div>
+          <div class="row">
+            <span class="pull-right">{{date}}</span>
+          </div>
+        </div>
       </div>
     </script>
   </body>
