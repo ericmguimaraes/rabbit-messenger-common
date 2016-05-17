@@ -138,15 +138,17 @@ var RabbitMessenger = (function() {
 
   function load() {
     renderQueues();
+    $("#message-text").keypress(function(e) {
+      if (e.which == 13) {
+        sendMessage();
+      }
+    });
     $("#send").on("click", sendMessage);
     window.setInterval(fetchMessages, 1000);
   }
 
   return {
-    ajax: ajax
-  , renderQueues: renderQueues
-  , renderMessages: renderMessages
-  , load: load
+    load: load
   , dumpMessages: dumpMessages
   , restoreMessages: restoreMessages
   , clear: function() {
