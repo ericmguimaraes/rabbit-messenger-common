@@ -155,6 +155,13 @@ var RabbitMessenger = (function() {
 
   function renderMessages() {
     $("#messages").html("");
+    if (messageList[currentUser] == null) {
+      messageList[currentUser] = {};
+    }
+
+    if (messageList[currentUser][currentConversation] == null) {
+      messageList[currentUser][currentConversation] = [];
+    }
     renderTemplate("message-template", messageList[currentUser][currentConversation], $("#messages"))
   }
 
@@ -166,7 +173,7 @@ var RabbitMessenger = (function() {
       }
     });
     $("#send").on("click", sendMessage);
-    window.setInterval(fetchMessages, 1000);
+    window.setInterval(fetchMessages, 5000);
   }
 
   return {
