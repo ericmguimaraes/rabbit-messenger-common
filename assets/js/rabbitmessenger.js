@@ -92,7 +92,15 @@ var RabbitMessenger = (function() {
     messages.html("");
     if (user != null) {
       renderMessages();
+      messages.addClass("talking");
+    } else {
+      messages.removeClass("talking");
     }
+  }
+
+  function scrollToBottom() {
+    var objDiv = document.getElementById("messages");
+    objDiv.scrollTop = objDiv.scrollHeight;
   }
 
   function fetchMessages() {
@@ -159,6 +167,9 @@ var RabbitMessenger = (function() {
       messageList = {};
       delete localStorage.messageList;
     }
+  , unselect: function() {
+      changeCurrentConversation(null);
+    }
   };
 })();
 
@@ -166,5 +177,10 @@ $(function() {
   RabbitMessenger.restoreMessages();
   RabbitMessenger.load();
   $(window).unload(RabbitMessenger.dumpMessages);
+  $(window).keyup(function(e) {
+    if (e.which == 27) {
+      RabbitMessenger.unselect();
+    }
+  });
 });
 

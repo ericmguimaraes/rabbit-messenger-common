@@ -49,6 +49,17 @@
   overflow-y: auto;
 }
 
+#messages + #message-input-area {
+  visibility: hidden;
+  opacity: 0;
+  transition: all .2s linear;
+}
+
+#messages.talking + #message-input-area {
+  visibility: visible;
+  opacity: 1;
+}
+
 #message-input-area {
   height: 10%;
   padding: 5px;
